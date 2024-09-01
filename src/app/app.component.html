@@ -1,0 +1,72 @@
+<div class="app-container">
+  <header>
+    <h1>{{ title }}</h1>
+  </header>
+
+  <!-- Button Group for Operations -->
+  <section class="button-group" aria-label="Product operations">
+    <button (click)="loadProducts()" class="btn all-products" aria-label="Load All Products">All Products</button>
+    <button (click)="addProduct()" class="btn btn-success" aria-label="Add Product">Add Product</button>
+    
+    <!-- Sorting Buttons -->
+    <button (click)="sortByPrice('desc')" class="btn btn-info" aria-label="Sort by Price (High to Low)">(High to Low)</button>
+    <button (click)="sortByPrice('asc')" class="btn btn-info" aria-label="Sort by Price (Low to High)">(Low to High)</button>
+    <button (click)="sortByTitle('asc')" class="btn btn-info" aria-label="Sort by Title (A to Z)">(A to Z)</button>
+    <button (click)="sortByTitle('desc')" class="btn btn-info" aria-label="Sort by Title (Z to A)">(Z to A)</button>
+  </section>
+
+  <!-- Product List -->
+  <section class="product-list" aria-label="Thrift Store">
+    <div class="product-card" *ngFor="let product of displayedProducts">
+      <img [src]="product.image" [alt]="product.title" class="product-image"/>
+      <div class="product-info">
+        <h3>{{ product.title }}</h3>
+        <p class="price">${{ product.price }}</p>
+        <p class="description">{{ product.description }}</p>
+        <button class="btn btn-info" (click)="openModal(product)" aria-label="View Details">View Details</button>
+        <button class="btn btn-warning" (click)="openUpdateModal(product)" aria-label="Update Product">Update Product</button>
+        <button class="btn btn-danger" (click)="deleteProduct(product.id)" aria-label="Delete Product">Delete</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pagination Controls -->
+  <section class="pagination-controls">
+    <button (click)="previousPage()" [disabled]="currentPage === 1" class="btn btn-info"><</button>
+    <button (click)="nextPage()" [disabled]="currentPage * itemsPerPage >= products.length" class="btn btn-info">></button>
+  </section>
+
+  <!-- Modal for Viewing Product Details -->
+  <div *ngIf="selectedProduct" class="modal" role="dialog" aria-labelledby="productDetailTitle" aria-modal="true">
+    <div class="modal-content">
+      <span class="close" (click)="closeProductDetail()" aria-label="Close Modal">&times;</span>
+      <h2 id="productDetailTitle">{{ selectedProduct.title }}</h2>
+      <img [src]="selectedProduct.image" [alt]="selectedProduct.title" class="product-image"/>
+      <p class="price">${{ selectedProduct.price }}</p>
+      <p class="description">{{ selectedProduct.description }}</p>
+    </div>
+  </div>
+
+  <!-- Modal for Updating Product -->
+  <div *ngIf="isUpdatingProduct" class="modal" role="dialog" aria-labelledby="updateProductTitle" aria-modal="true">
+    <div class="modal-content">
+      <span class="close" (click)="closeUpdateModal()" aria-label="Close Modal">&times;</span>
+      <h2 id="updateProductTitle">Update Product</h2>
+      <form (ngSubmit)="saveUpdatedProduct()">
+        <div>
+          <label for="update-title">Title:</label>
+          <input id="update-title" [(ngModel)]="updateProduct.title" name="title" required />
+        </div>
+        <div>
+          <label for="update-price">Price:</label>
+          <input id="update-price" [(ngModel)]="updateProduct.price" name="price" type="number" required />
+        </div>
+        <div>
+          <label for="update-description">Description:</label>
+          <textarea id="update-description" [(ngModel)]="updateProduct.description" name="description" required></textarea>
+        </div>
+        <button type="submit" class="btn btn-success">Save</button>
+      </form>
+    </div>
+  </div>
+</div>

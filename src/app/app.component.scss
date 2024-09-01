@@ -1,0 +1,270 @@
+// Variables for consistent styling
+$primary-color: #ff0000;
+$secondary-color: rgb(0, 0, 0);
+$success-color: #28a745;
+$warning-color: #ffc107;
+$danger-color: #ffd900;
+$background-color: #f8f9fa;
+$modal-background: #ffffff;
+$modal-overlay: rgba(0, 0, 0, 0.5);
+
+// Base styles
+body {
+  font-family: 'Arial', sans-serif;
+  line-height: 1.6;
+  background-color: lighten($background-color, 5%);
+  color: darken($secondary-color, 20%);
+}
+
+// Container styling
+.app-container {
+  max-width: 80rem;
+  margin: 0 auto;
+  padding: 2rem;
+  background-color: $background-color;
+  box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.1);
+  border-radius: 0.75rem;
+}
+
+// Button Group styling
+.button-group {
+  margin-bottom: 2rem;
+  text-align: center;
+
+  .btn {
+    margin: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    border-radius: 0.375rem;
+    transition: background-color 0.3s, transform 0.3s;
+
+    &.all-products {
+      background-color: $secondary-color;
+      color: #fff;
+    }
+
+    &.btn-success {
+      background-color: $secondary-color;
+      color: #fff;
+    }
+
+    &.btn-info {
+      background-color: darken($secondary-color, 10%);
+      color: #fff;
+    }
+
+    &.btn-warning {
+      background-color: $warning-color;
+      color: #212529;
+    }
+
+    &.btn-danger {
+      background-color: $danger-color;
+      color: #fff;
+    }
+
+    &:hover {
+      background-color: lighten($primary-color, 10%);
+      transform: translateY(-0.1rem);
+      box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.2);
+    }
+  }
+}
+
+// Product List styling
+.product-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  justify-content: center; // Centering the product list
+  padding: 2rem; // Adding padding for more space
+  max-width: 90%; // Ensuring it's a bit larger
+  margin: 0 auto; // Centering within the container
+}
+
+// Product Card styling
+.product-card {
+  background-color: $background-color;
+  border-radius: 0.5rem;
+  box-shadow: 0 0.125rem 0.5rem rgba(0, 0, 0, 0.1);
+  padding: 1rem;
+  width: 20rem;
+  text-align: center;
+  transition: transform 0.3s, box-shadow 0.3s;
+
+  &:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+  }
+
+  .product-image {
+    max-width: 50%;
+    height: auto;
+    border-radius: 0.5rem;
+  }
+
+  .product-info {
+    margin-top: 1rem;
+
+    h3 {
+      font-size: 1.4rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .price {
+      font-size: 1.2rem;
+      color: $success-color;
+      margin-bottom: 0.75rem;
+    }
+
+    .description {
+      font-size: 1rem;
+      color: $secondary-color;
+    }
+
+    .btn {
+      margin-top: 0.75rem;
+      transition: background-color 0.3s, transform 0.3s;
+
+      &:hover {
+        background-color: lighten($success-color, 10%);
+        transform: translateY(-0.1rem);
+      }
+    }
+  }
+}
+
+// Modal Styling
+.modal {
+  display: block;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: $modal-overlay;
+
+  .modal-content {
+    background-color: $modal-background;
+    margin: 5% auto;  // Adjusted margin for a better vertical centering
+    padding: 1.5rem;
+    border: 1px solid #888;
+    width: 80%;       // Adjusted width for better fit
+    max-width: 40rem; // Maximum width to maintain consistency
+    border-radius: 0.5rem;
+    text-align: center;
+
+    // Optional: Adjust the height if needed
+    max-height: 80vh; // Limit height to viewport height
+    overflow-y: auto; // Allow scrolling if content overflows
+
+    // Form styling
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      margin-top: 1.5rem;
+
+      label {
+        font-weight: bold;
+        color: darken($secondary-color, 10%);
+        font-size: 1.1rem;
+      }
+
+      input[type="number"],
+      textarea {
+        padding: 0.75rem;
+        border: 1px solid #ddd;
+        border-radius: 0.375rem;
+        font-size: 1rem;
+      }
+
+      textarea {
+        resize: vertical;
+        min-height: 6rem;
+      }
+
+      button {
+        margin-top: 1rem;
+        padding: 0.75rem 1.5rem;
+        border: none;
+        border-radius: 0.375rem;
+        cursor: pointer;
+        transition: background-color 0.3s, transform 0.3s;
+        font-size: 1rem;
+        font-weight: bold;
+
+        &.btn-success {
+          background-color: $success-color;
+          color: #fff;
+
+          &:hover {
+            background-color: lighten($success-color, 10%);
+            transform: translateY(-0.1rem);
+          }
+        }
+      }
+    }
+  }
+
+  .close {
+    color: $secondary-color;
+    float: right;
+    font-size: 1.75rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 0.3s;
+
+    &:hover {
+      color: darken($secondary-color, 20%);
+    }
+  }
+
+  img {
+    max-width: 50%;
+    border-radius: 0.5rem;
+  }
+
+  h2 {
+    margin-top: 0;
+    font-size: 1.5rem;
+  }
+
+  .price {
+    font-size: 1.75rem;
+    color: $success-color;
+    margin-top: 0.75rem;
+  }
+}
+
+// Responsive design adjustments
+@media (max-width: 768px) {
+  .app-container {
+    padding: 1rem;
+  }
+
+  .product-card {
+    width: 18rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .button-group {
+    .btn {
+      font-size: 0.875rem;
+      padding: 0.5rem 1rem;
+    }
+  }
+
+  .product-card {
+    width: 100%;
+    max-width: 90%;
+    margin: 0 auto;
+  }
+
+  .modal-content {
+    width: 95%;
+  }
+}
